@@ -1,6 +1,3 @@
-// pages/HomePage.jsx
-import React from 'react'
-import Nav from '../component/Nav'
 import CampaCola from './CampaCola'
 import Legacy from './Legacy'
 
