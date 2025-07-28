@@ -34,3 +34,10 @@ body {
   font-family: 'SignPainter';
   src: url('../public/fonts/SignPainter.ttf');
 }
+@keyframes flicker {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.3; }
+}
+.animate-flicker {
+  animation: flicker 0.1s infinite;
+}

@@ -1,5 +1,4 @@
-import React from 'react'
-import campaLogo from '../assets/campanewLogo.png'
+// import campaLogo from '../assets/campanewLogo.png'
 
 const Nav = () => {
   return (
