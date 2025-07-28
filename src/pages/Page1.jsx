@@ -26,9 +26,9 @@ const LanguageBanner = () => {
       }, 2000);
       return () => clearTimeout(timer);
     } else {
-      // 🧠 Redirect after last language
+      // Redirect to main site
       const redirectTimer = setTimeout(() => {
-        navigate("/campacola"); // 👈 Change route as per your routing
+        navigate("/campacola");
       }, 2000);
       return () => clearTimeout(redirectTimer);
     }
@@ -37,16 +37,15 @@ const LanguageBanner = () => {
   const currentLang = languages[index];
 
   return (
-    
-    <div className="h-40 w-full flex items-center justify-center bg-[#0B132B] border-y-2 border-[#D6B96A]/40 shadow-[0_4px_10px_rgba(214,185,106,0.25)] backdrop-blur-sm relative z-10">
+    <div className="h-screen w-full bg-[#0B132B] flex items-center justify-center">
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -30 }}
-          transition={{ duration: 0.6 }}
-          className={`text-5xl md:text-7xl tracking-wide text-[#D6B96A] drop-shadow-[0_3px_6px_rgba(214,185,106,0.6)] ${currentLang.font} font-semibold italic`}
+          initial={{ opacity: 0, z: 30, scale: 0.95 }}
+          animate={{ opacity: 1, z: 0, scale: 1 }}
+          exit={{ opacity: 0, z: -30, scale: 0.95 }}
+          transition={{ duration: 0.7 }}
+          className="text-4xl md:text-7xl tracking-wide text-[#D6B96A] drop-shadow-[0_3px_6px_rgba(214,185,106,0.6)] font-semibold italic text-center"
         >
           {currentLang.text}
         </motion.div>
