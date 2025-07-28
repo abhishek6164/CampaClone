@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+
+@font-face {
+  font-family: 'Interregular';
+  src: url('../public/fonts/InterRegular.ttf');
+
+}
+
+@font-face{
+  font-family: 'JioType';
+  src: url('../public/fonts/JioType.woff2');
+}
+
+@font-face {
+  font-family: 'LogiKWide';
+  src: url('../public/fonts/LogikWide.ttf');
+}
+
+@font-face {
+  font-family: 'SignPainter';
+  src: url('../public/fonts/SignPainter.ttf');
+}
