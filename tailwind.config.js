@@ -21,6 +21,20 @@ module.exports = {
         malayalam: ["'Noto Serif Malayalam'", "serif"],
         urdu: ["'Noto Naskh Arabic'", "serif"],
       },
+      keyframes: {
+        float: {
+          '0%, 100%': {
+            transform: 'translateY(0)'
+          },
+          '50%': {
+            transform: 'translateY(-10px)'
+          },
+        },
+      },
+      animation: {
+        float: 'float 3s ease-in-out infinite',
+        fadeInZoom: 'fadeInZoom 1.2s ease-out forwards',
+      },
     },
   },
   plugins: [],

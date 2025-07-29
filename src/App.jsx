@@ -1,10 +1,8 @@
-import React from 'react'
-
-// import Page1 from './pages/Page1.jsx';
 import CampaCola from './pages/CampaCola.jsx';
 import Legacy from './pages/Legacy.jsx';
 import Nav from './component/Nav.jsx'; 
-
+import CampaCricket from './pages/campaCricket.jsx';
+import PowerUp from './pages/PowerUp.jsx';
 const App = () => {
   return (
     <div className='min-h-screen text-white'>
@@ -12,6 +10,8 @@ const App = () => {
       <Nav/>
       <CampaCola />
       <Legacy />
+      <CampaCricket/>
+      <PowerUp/>
     </div>
   )
 }

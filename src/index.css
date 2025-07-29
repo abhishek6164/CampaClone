@@ -41,3 +41,7 @@ body {
 .animate-flicker {
   animation: flicker 0.1s infinite;
 }
+/* 
+.stadium{
+  background-image: url('../src/assets/stadium.png');
+} */
