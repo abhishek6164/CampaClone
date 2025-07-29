@@ -3,7 +3,7 @@
 const Nav = () => {
   return (
     <header className="relative z-50">
-      <nav className="fixed top-0 left-0 w-full bg-transparent text-[#D6B96A] px-16 py-6 border-y-2 border-[#D6B96A]/10 shadow-md flex justify-center z-50">
+      <nav className="fixed top-0 left-0 w-full bg-  bg-gradient-to-b from-[#08142B] via-[#0D1D3B] to-[#08142B] text-[#D6B96A] px-16 py-6 border-y-2 border-[#D6B96A]/10 shadow-md flex justify-center z-50">
         <ul className="flex flex-wrap items-center justify-between gap-6 text-sm md:text-base font-semibold tracking-wide w-full max-w-7xl">
           <li className="hover:text-white transition duration-200 cursor-pointer">CAMPA COLA</li>
           <li className="hover:text-white transition duration-200 cursor-pointer">LEGACY</li>

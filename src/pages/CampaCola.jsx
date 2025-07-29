@@ -46,79 +46,79 @@ const CampaCola = () => {
     return () => clearInterval(bubbleInterval);
   }, []);
 
- const revealCan = () => {
-  setShowCan(true);
+  const revealCan = () => {
+    setShowCan(true);
 
-  const tl = gsap.timeline();
+    const tl = gsap.timeline();
 
-  tl.fromTo(
-    ".can",
-    { y: -200, opacity: 0, scale: 0.9, rotate: -20 },
-    {
-      y: 0,
-      opacity: 1,
-      scale: 1,
-      rotate: 0,
-      duration: 1.5,
-      ease: "bounce.out",
-    }
-  );
+    tl.fromTo(
+      ".can",
+      { y: -200, opacity: 0, scale: 0.9, rotate: -20 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        rotate: 0,
+        duration: 1.5,
+        ease: "bounce.out",
+      }
+    );
 
-  tl.fromTo(
-    ".headline",
-    { y: 30, opacity: 0 },
-    {
-      y: 0,
-      opacity: 1,
-      duration: 1,
-      ease: "power3.out",
-    },
-    "-=0.5"
-  );
+    tl.fromTo(
+      ".headline",
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+      },
+      "-=0.5"
+    );
 
-  tl.to(
-    ".can",
-    {
-      boxShadow: "0 0 25px #D6B96A",
-      duration: 1,
-      repeat: 3,
-      yoyo: true,
-      ease: "sine.inOut",
-    },
-    "+=0.5"
-  );
+    tl.to(
+      ".can",
+      {
+        boxShadow: "0 0 25px #D6B96A",
+        duration: 1,
+        repeat: 3,
+        yoyo: true,
+        ease: "sine.inOut",
+      },
+      "+=0.5"
+    );
 
-  tl.to(
-    ".can",
-    {
-      y: "+=6",
-      duration: 0.2,
-      repeat: 10,
-      yoyo: true,
-      ease: "sine.inOut",
-    },
-    "+=0.5"
-  );
+    tl.to(
+      ".can",
+      {
+        y: "+=6",
+        duration: 0.2,
+        repeat: 10,
+        yoyo: true,
+        ease: "sine.inOut",
+      },
+      "+=0.5"
+    );
 
-  tl.to(".headline", {
-    textShadow: "0 0 20px #D6B96A",
-    duration: 2,
-    repeat: -1,
-    yoyo: true,
-    ease: "power2.inOut",
-  });
-
-  // 🎯 Add 10° continuous rotation at 9 seconds
-  setTimeout(() => {
-    gsap.to(".can", {
-      rotate: 10,
-      duration: 1.5,
-      yoyo: true,
+    tl.to(".headline", {
+      textShadow: "0 0 20px #D6B96A",
+      duration: 2,
       repeat: -1,
-      ease: "sine.inOut",
+      yoyo: true,
+      ease: "power2.inOut",
     });
-  }, 500); // 9 seconds = 9000 milliseconds
-};
+
+    // 🎯 Add 10° continuous rotation at 9 seconds
+    setTimeout(() => {
+      gsap.to(".can", {
+        rotate: 30,
+        duration: 1,
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.out",
+      });
+    }, 500); // 9 seconds = 9000 milliseconds
+  };
 
 
   const playFizzSound = () => {
@@ -153,7 +153,7 @@ const CampaCola = () => {
   };
 
   return (
-    <section className="relative bg-[#0B132B] -mt-44 h-screen w-full overflow-hidden text-white flex items-center justify-center flex-col">
+    <section className="relative bg-[#0B132B]  h-[800px] w-full overflow-hidden text-white flex items-center justify-center flex-col">
       <audio ref={audioRef} src={fizzSound} preload="auto" />
 
       {/* Bubbles */}
@@ -187,18 +187,16 @@ const CampaCola = () => {
           <img
             src={campaCan}
             alt="Campa Can"
-            className={`can h-96 md:h-[650px] cursor-pointer transition-all duration-700 ${
-              stableGlow ? "" : ""
-            }`}
+            className={`can h-96 md:h-[680px] cursor-pointer transition-all duration-700 ${stableGlow ? "" : ""
+              }`}
           />
         )}
 
         {/* Headline Text */}
         {showCan && (
           <h2
-            className={`headline  z-10 italic text-3xl md:text-7xl font-bold tracking-wider text-[#D6B96A] ${
-              stableGlow ? "text-glow" : ""
-            }`}
+            className={`headline  z-10 italic text-3xl md:text-7xl font-bold tracking-wider text-[#D6B96A] ${stableGlow ? "text-glow" : ""
+              }`}
           >
             Campa Wali Zidd!!
           </h2>
