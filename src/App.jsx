@@ -1,7 +1,7 @@
 import CampaCola from './pages/CampaCola.jsx';
 import Legacy from './pages/Legacy.jsx';
 import Nav from './component/Nav.jsx'; 
-import CampaCricket from './pages/campaCricket.jsx';
+import CampaCricket from './pages/CampaCricket.jsx';
 import PowerUp from './pages/PowerUp.jsx';
 const App = () => {
   return (
