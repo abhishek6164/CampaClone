@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import campaCricket from "../assets/CampaCricket.mp4";
 import campacricket from "../assets/campacricket.png";
 import stadium from "../assets/stadium.png";
@@ -8,6 +9,8 @@ const CampaCricket = () => {
   const textRef = useRef(null);
   const videoRef = useRef(null);
   const containerRef = useRef(null);
+  const bottleRef = useRef(null);
+  const isBottleInView = useInView(bottleRef, { once: true, amount: 0.3 });
 
   useEffect(() => {
     const text = textRef.current;
@@ -37,7 +40,6 @@ const CampaCricket = () => {
 
   return (
     <div className="w-full bg-black text-white">
-
       {/* 🏏 Top Video Section */}
       <div
         ref={containerRef}
@@ -82,40 +84,56 @@ const CampaCricket = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        {/* 💨 Dark overlay for readability */}
         <div className="absolute inset-0 bg-black/40 z-0"></div>
 
-        {/* ✨ Content Overlay */}
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 w-full max-w-[1300px]">
 
-          {/* ⬅️ Left Text */}
-          <div className="text-center md:text-left md:w-1/3 space-y-4 animate-slideInLeft">
+          {/* Left Text */}
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: .9, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="text-center md:text-left md:w-1/3 space-y-4"
+          >
             <h1 className="text-3xl md:text-5xl font-logik text-cyan-300 drop-shadow-lg">
               FIZZY LEMONY <br /> REHYDRATOR
             </h1>
             <p className="text-lg md:text-2xl text-gray-300 font-jio">
               A zesty burst of cricket energy 🍋🏏
             </p>
-          </div>
+          </motion.div>
 
-          {/* 🖼️ Center Bottle Image */}
-          <div className="relative w-[250px] md:w-[380px] h-auto animate-floatSlow">
+          {/* Center Bottle */}
+          <motion.div
+            ref={bottleRef}
+            initial={{ scale: .9, opacity: 0 }}
+            animate={isBottleInView ? { scale: 1, opacity: 1 } : {}}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="relative w-[250px] md:w-[380px] h-auto"
+          >
             <img
               src={campacricket}
               alt="Campa Cricket Bottle"
-              className="w-full h-[800px] rounded-2xl "
+              className="w-full h-[800px] rounded-2xl"
             />
-          </div>
+          </motion.div>
 
-          {/* ➡️ Right Text */}
-          <div className="text-center md:text-left md:w-1/3 space-y-4 animate-slideInRight">
+          {/* Right Text */}
+          <motion.div
+            initial={{ x: 100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: .9, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="text-center md:text-left md:w-1/3 space-y-4"
+          >
             <h1 className="text-3xl md:text-5xl font-logik text-cyan-300 drop-shadow-lg">
               POWERED WITH <br /> ELECTROLYTES ⚡
             </h1>
             <p className="text-lg md:text-2xl text-gray-300 font-jio">
               Replenish. Refresh. Rejoice.
             </p>
-          </div>
+          </motion.div>
 
         </div>
       </div>
