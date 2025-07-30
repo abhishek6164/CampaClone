@@ -3,6 +3,7 @@ import Legacy from './pages/Legacy.jsx';
 import Nav from './component/Nav.jsx'; 
 import CampaCricket from './pages/CampaCricket.jsx';
 import PowerUp from './pages/PowerUp.jsx';
+import Footer from './component/Footer.jsx';
 const App = () => {
   return (
     <div className='min-h-screen text-white'>
@@ -12,6 +13,7 @@ const App = () => {
       <Legacy />
       <CampaCricket/>
       <PowerUp/>
+      <Footer/>
     </div>
   )
 }
