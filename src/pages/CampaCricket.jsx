@@ -39,7 +39,7 @@ const CampaCricket = () => {
   }, []);
 
   return (
-    <div className="w-full bg-black text-white">
+    <div className="w-full text-white">
       {/* 🏏 Top Video Section */}
       <div
         ref={containerRef}
