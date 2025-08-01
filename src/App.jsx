@@ -7,12 +7,12 @@ import Nav from './component/Nav.jsx';
 import CampaCricket from './pages/CampaCricket.jsx';
 import PowerUp from './pages/PowerUp.jsx';
 import Footer from './component/Footer.jsx';
-import ProductRange from './pages/ProductRange.jsx';
 import FlavorSection from './pages/FlavorSection.jsx';
+import FizzyMemories from './pages/FizzyMemories.jsx';
+
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const App = () => {
-
   useGSAP(() => {
     ScrollSmoother.create({
       smooth: 3,
@@ -21,23 +21,23 @@ const App = () => {
   });
 
   return (
-
     <div id="smooth-wrapper">
-      <div id="smooth-content">
+      {/* ✅ Fixed Nav placed outside smooth-content */}
+      <Nav />
+      
+      <div id="smooth-content" className="pt-20"> {/* Add padding to avoid content hiding under navbar */}
         <div className='min-h-screen text-white'>
-          {/* <Page1 /> */}
-          <Nav />
           <CampaCola />
           <Legacy />
           <CampaCricket />
           <PowerUp />
           <FlavorSection />
-          <ProductRange />
+          <FizzyMemories />
           <Footer />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

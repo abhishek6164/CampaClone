@@ -1,234 +1,72 @@
-// same imports as before
-import React, { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import campaCan from "../assets/campa1.png";
-import fizzSound from "../assets/Campa Wali Zidd - (10s).mp3";
+import React from "react";
+import { motion } from "framer-motion";
+import campaBottle from "../assets/campa1.png";
 
 const CampaCola = () => {
-  const audioRef = useRef(null);
-  const [showCan, setShowCan] = useState(false);
-  const [showSuspense, setShowSuspense] = useState(false);
-  const [showFlicker, setShowFlicker] = useState(false);
-  const [stableGlow, setStableGlow] = useState(false);
-
-  useEffect(() => {
-    const createBubble = () => {
-      const bubbleContainer = document.querySelector(".bubbles");
-      if (!bubbleContainer) return;
-
-      const bubble = document.createElement("span");
-      bubble.classList.add("bubble");
-
-      const size = Math.random() * 6 + 4;
-      bubble.style.width = `${size}px`;
-      bubble.style.height = `${size}px`;
-      bubble.style.left = `${Math.random() * 100}%`;
-      bubble.style.bottom = `-0px`;
-      bubble.style.position = "absolute";
-      bubble.style.background = "#D6B96A";
-      bubble.style.borderRadius = "50%";
-      bubble.style.opacity = "0.3";
-      bubble.style.filter = "blur(1px)";
-      bubble.style.zIndex = "0";
-
-      bubbleContainer.appendChild(bubble);
-
-      gsap.to(bubble, {
-        y: -window.innerHeight - 100,
-        x: Math.random() * 50 - 25,
-        duration: 4 + Math.random() * 2,
-        ease: "sine.out",
-        onComplete: () => bubble.remove(),
-      });
-    };
-
-    const bubbleInterval = setInterval(createBubble, 200);
-    return () => clearInterval(bubbleInterval);
-  }, []);
-
-  const revealCan = () => {
-    setShowCan(true);
-
-    const tl = gsap.timeline();
-
-    tl.fromTo(
-      ".can",
-      { y: -200, opacity: 0, scale: 0.9, rotate: -20 },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        rotate: 0,
-        duration: 1.5,
-        ease: "bounce.out",
-      }
-    );
-
-    tl.fromTo(
-      ".headline",
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power3.out",
-      },
-      "-=0.5"
-    );
-
-    tl.to(
-      ".can",
-      {
-        boxShadow: "0 0 25px #D6B96A",
-        duration: 1,
-        repeat: 3,
-        yoyo: true,
-        ease: "sine.inOut",
-      },
-      "+=0.5"
-    );
-
-    tl.to(
-      ".can",
-      {
-        y: "+=6",
-        duration: 0.2,
-        repeat: 10,
-        yoyo: true,
-        ease: "sine.inOut",
-      },
-      "+=0.5"
-    );
-
-    tl.to(".headline", {
-      textShadow: "0 0 20px #D6B96A",
-      duration: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: "power2.inOut",
-    });
-
-    // 🎯 Add 10° continuous rotation at 9 seconds
-    setTimeout(() => {
-      gsap.to(".can", {
-        rotate: 30,
-        duration: 1,
-        yoyo: true,
-        repeat: -1,
-        ease: "sine.out",
-      });
-    }, 500); // 9 seconds = 9000 milliseconds
-  };
-
-
-  const playFizzSound = () => {
-    const sound = audioRef.current;
-    if (!sound) return;
-
-    sound.volume = 0.7;
-    sound.currentTime = 0;
-
-    sound
-      .play()
-      .then(() => {
-        setShowSuspense(true);
-        setShowFlicker(true);
-
-        setTimeout(() => {
-          revealCan();
-          setShowSuspense(false);
-        }, 6000); // suspense build
-
-        setTimeout(() => {
-          setShowFlicker(false);
-        }, 6000); // flicker stop
-
-        setTimeout(() => {
-          setStableGlow(true); // ✨ Final glow
-        }, 6000); // almost end
-      })
-      .catch((err) => {
-        console.warn("Autoplay blocked", err);
-      });
-  };
-
   return (
-    <section className="relative bg-[#0B132B]  h-[800px] w-full overflow-hidden text-white flex items-center justify-center flex-col">
-      <audio ref={audioRef} src={fizzSound} preload="auto" />
+    <section className="relative w-full min-h-screen bg-[#0A0A0A] text-white overflow-hidden flex items-center justify-center px-4 sm:px-6 lg:px-20 py-16">
+      {/* 💭 Animated Blurry Bubbles */}
+      {[...Array(30)].map((_, i) => {
+        const size = Math.random() * 15 + 4;
+        const left = Math.random() * 100;
+        const blur = Math.random() > 0.5 ? "blur-sm" : "blur-md";
+        const delay = Math.random() * 2;
 
-      {/* Bubbles */}
-      <div className="absolute inset-0 bubbles pointer-events-none z-0"></div>
-
-      {/* Suspense Text */}
-      {showSuspense && (
-        <div className="absolute z-20 bottom-20 text-center text-[#D6B96A] text-xl md:text-3xl italic tracking-wide animate-pulse">
-          Zidd Jaag Rahi Hai...
-        </div>
-      )}
-
-      {/* Flicker BG */}
-      {showFlicker && (
-        <div className="absolute inset-0 bg-white opacity-10 animate-flicker z-30 pointer-events-none" />
-      )}
-
-      {/* Main Content */}
-      <div className="relative z-10 flex justify-between   flex-wrap items-center">
-        {!showCan && (
-          <button
-            onClick={playFizzSound}
-            className="text-[#D6B96A] border border-[#D6B96A] px-6 py-3 rounded-full hover:bg-[#D6B96A]/20 transition-all ease-in-out duration-300 text-lg md:text-xl"
-          >
-            Click to Unlock the Zidd!
-          </button>
-        )}
-
-        {/* Can Image */}
-        {showCan && (
-          <img
-            src={campaCan}
-            alt="Campa Can"
-            className={`can h-96 md:h-[680px] cursor-pointer transition-all duration-700 ${stableGlow ? "" : ""
-              }`}
+        return (
+          <motion.div
+            key={i}
+            className={`absolute rounded-full bg-cyan-400 opacity-40 ${blur}`}
+            style={{
+              width: `${size}px`,
+              height: `${size}px`,
+              left: `${left}%`,
+              bottom: `${Math.random() * 100}px`,
+              zIndex: 1,
+            }}
+            animate={{
+              y: [-10, -200, -300],
+              opacity: [0, 0.5, 0],
+            }}
+            transition={{
+              duration: Math.random() * 8 + 4,
+              repeat: Infinity,
+              delay: delay,
+              ease: "easeInOut",
+            }}
           />
-        )}
+        );
+      })}
 
-        {/* Headline Text */}
-        {showCan && (
-          <h2
-            className={`headline  z-10 italic text-3xl md:text-7xl font-bold tracking-wider text-[#D6B96A] ${stableGlow ? "text-glow" : ""
-              }`}
-          >
-            Campa Wali Zidd!!
+      {/* 💫 Main Content */}
+      <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 items-center gap-10 relative z-10">
+        {/* 🥫 Rotating Bottle */}
+        <motion.img
+          src={campaBottle}
+          alt="Campa Bottle"
+          initial={{ rotate: -180, opacity: 0, x: -200 }}
+          animate={{ rotate: 0, opacity: 1, x: 0 }}
+          transition={{ duration: 1.8, ease: "easeOut" }}
+          className="h-[250px] sm:h-[350px] md:h-[500px] lg:h-[600px] mx-auto"
+        />
+
+        {/* 🧾 Slogan Text */}
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.5, delay: 0.8, ease: "easeOut" }}
+          className="text-center md:text-left space-y-6 px-2 sm:px-4"
+        >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-logik text-transparent bg-gradient-to-tr from-cyan-300 via-white to-cyan-300 bg-clip-text drop-shadow-xl animate-pulse leading-tight">
+            CAPTURING THE <br />
+            SPIRIT OF INDIA <br />
+            <span className="text-white font-light">THROUGH</span> <br />
+            THE GREAT INDIAN TASTE
           </h2>
-        )}
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-lg font-jio mx-auto md:mx-0">
+            Ek bottle jo sirf thandak nahi laati, balki yaadein bhi taza karti hai.
+          </p>
+        </motion.div>
       </div>
-
-      {/* Extra Styles */}
-      <style>
-        {`
-          @keyframes flicker {
-            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-              opacity: 0.1;
-            }
-            20%, 22%, 24%, 55% {
-              opacity: 0.5;
-            }
-          }
-
-          .animate-flicker {
-            animation: flicker 0.15s infinite;
-          }
-
-          .text-glow {
-            text-shadow: 0 0 20px #D6B96A, 0 0 40px #D6B96A;
-          }
-
-          .shadow-stable-glow {
-            box-shadow: 0 0 25px #D6B96A, 0 0 60px #D6B96A;
-            transition: box-shadow 0.6s ease-in-out;
-          }
-        `}
-      </style>
     </section>
   );
 };

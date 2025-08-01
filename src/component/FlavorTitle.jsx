@@ -42,37 +42,36 @@ const FlavorTitle = () => {
   });
 
   return (
-    <div className="general-title col-center h-full font-logik 2xl:gap-32 xl:gap-24 gap-16">
+    <div className="general-title col-center h-full font-logik gap-12 md:gap-20 xl:gap-28 2xl:gap-32 px-4 sm:px-8">
       {/* First Line */}
-      <div className="overflow-hidden  2xl:py-0 py-5 ">
-        <h1 className="text-5xl md:text-8xl font-logik text-transparent bg-gradient-to-tr from-cyan-300 via-white to-cyan-300 bg-clip-text drop-shadow-2xl">
+      <div className="first-text-split overflow-hidden py-3 md:py-5">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-logik text-transparent bg-gradient-to-tr from-cyan-300 via-white to-cyan-300 bg-clip-text drop-shadow-2xl text-center sm:text-left">
           We have 6
         </h1>
       </div>
 
-      {/* Freaking */}
+      {/* Middle Line - Freaking */}
       <div
         style={{
           clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)",
         }}
         className="flavor-text-scroll"
       >
-        <div className="bg-gradient-to-tr from-gray-900 via-black to-gray-900 pb-5 2xl:pt-1 pt-5 2xl:px-5 px-3 rounded-xl shadow-md">
-          <h2 className="text-5xl md:text-7xl font-bold  text-transparent bg-gradient-to-tr from-cyan-300 via-white to-cyan-300 bg-clip-text drop-shadow-xl font-logik">
+        <div className="bg-gradient-to-tr from-gray-900 via-black to-gray-900 py-4 px-6 md:py-5 md:px-10 rounded-xl shadow-md w-fit mx-auto sm:mx-0">
+          <h2 className="second-text-split text-4xl sm:text-6xl md:text-7xl font-bold text-transparent bg-gradient-to-tr from-cyan-300 via-white to-cyan-300 bg-clip-text drop-shadow-xl font-logik text-center sm:text-left">
             freaking
           </h2>
         </div>
       </div>
 
       {/* Last Line */}
-      <div className=" 2xl:py-0 py-3  ">
-        <h1 className="text-5xl md:text-8xl font-logik text-transparent bg-gradient-to-tr from-cyan-300 via-white to-cyan-300 bg-clip-text drop-shadow-2xl">
-          delicious <br /> flavors
+      <div className="overflow-hidden py-3 md:py-5">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-logik text-transparent bg-gradient-to-tr from-cyan-300 via-white to-cyan-300 bg-clip-text drop-shadow-2xl text-center sm:text-left">
+          delicious <br className="hidden sm:block" /> flavors
         </h1>
       </div>
     </div>
   );
 };
-
 
 export default FlavorTitle;

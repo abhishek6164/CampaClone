@@ -40,43 +40,57 @@ const CampaCricket = () => {
 
   return (
     <div className="w-full text-white">
-      {/* 🏏 Top Video Section */}
+      {/* 🎬 Hero Cricket Video Section */}
       <div
         ref={containerRef}
-        className="flex flex-col  items-center justify-center min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black px-4"
+        className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black px-4 relative overflow-hidden"
       >
-        <h1 className="text-5xl md:text-7xl font-bold font-logik text-transparent bg-gradient-to-tr from-cyan-300 via-white to-cyan-300 bg-clip-text drop-shadow-2xl animate-pulse mt-20">
+        <motion.h1
+          initial={{ scale: 0.9, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="text-4xl sm:text-5xl md:text-6xl font-bold font-logik text-transparent bg-gradient-to-tr from-cyan-300 via-white to-cyan-300 bg-clip-text drop-shadow-2xl animate-pulse mt-20 text-center"
+        >
           Refresh The Josh!
-        </h1>
+        </motion.h1>
 
-        <p className="mt-4 text-2xl md:text-3xl text-center font-inter text-transparent bg-gradient-to-tr from-cyan-100 via-gray-200 to-cyan-100 bg-clip-text drop-shadow-lg animate-float">
+        <motion.p
+          initial={{ y: 30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="mt-4 text-lg sm:text-xl md:text-2xl text-center font-inter text-transparent bg-gradient-to-tr from-cyan-100 via-gray-200 to-cyan-100 bg-clip-text drop-shadow-lg animate-float max-w-3xl"
+        >
           Cheer with Campa Cricket, from the House of Campa
-        </p>
+        </motion.p>
 
-        <div className="w-[80vw] h-[80vh] mt-20 overflow-hidden relative rounded-2xl shadow-[0_0_50px_#00FFF7] border border-cyan-300">
+        <div className="w-[95vw] sm:w-[85vw] md:w-[80vw] max-w-[1200px] h-[55vh] sm:h-[65vh] md:h-[75vh] mt-12 overflow-hidden relative rounded-2xl shadow-[0_0_50px_#00FFF7] border border-cyan-300 group transition-all duration-500">
           <video
             ref={videoRef}
             src={campaCricket}
             loop
             playsInline
             muted
-            className="w-full h-full object-cover rounded-xl border-4 border-[#00FFF7] shadow-[0_0_30px_#00FFF7] transition-all duration-700 hover:scale-[1.02]"
+            className="w-full h-full object-cover rounded-xl border-4 border-[#00FFF7] shadow-[0_0_30px_#00FFF7] group-hover:scale-[1.03] transition-all duration-700"
           ></video>
 
-          <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-            <h1
+          {/* ✨ Overlay Text */}
+          <div className="absolute inset-0 bg-black/30 flex items-center justify-center pointer-events-none">
+            <motion.h1
               ref={textRef}
-              className="text-white text-5xl font-bold drop-shadow-2xl opacity-0"
+              initial={{ scale: 0.8, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="text-white text-2xl sm:text-4xl md:text-5xl font-bold drop-shadow-2xl text-center"
             >
               Campa x Cricket 🏏
-            </h1>
+            </motion.h1>
           </div>
         </div>
       </div>
 
-      {/* 🏟️ Stadium Background Section */}
+      {/* 🏟️ Stadium Scene */}
       <div
-        className="relative mt-10 min-h-screen w-full flex items-center justify-center px-4 py-16"
+        className="relative mt-10 min-h-screen w-full flex items-center justify-center px-4 py-16 overflow-hidden"
         style={{
           backgroundImage: `url(${stadium}), url(${audience})`,
           backgroundSize: "cover",
@@ -84,57 +98,64 @@ const CampaCricket = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="absolute inset-0 bg-black/40 z-0"></div>
+        <div className="absolute inset-0 bg-black/50 z-0 backdrop-blur-sm"></div>
 
-        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 w-full max-w-[1300px]">
-
-          {/* Left Text */}
+        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 w-full max-w-[1300px]">
+          {/* 💬 Left Info */}
           <motion.div
             initial={{ x: -100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: .9, ease: "easeOut" }}
+            transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="text-center md:text-left md:w-1/3 space-y-4"
+            className="text-center md:text-left w-full md:w-1/3 space-y-4 px-2"
           >
-            <h1 className="text-3xl md:text-5xl font-logik text-cyan-300 drop-shadow-lg">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-logik text-cyan-300 drop-shadow-lg">
               FIZZY LEMONY <br /> REHYDRATOR
             </h1>
-            <p className="text-lg md:text-2xl text-gray-300 font-jio">
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 font-jio">
               A zesty burst of cricket energy 🍋🏏
             </p>
           </motion.div>
 
-          {/* Center Bottle */}
+          {/* 🧃 Bottle */}
           <motion.div
             ref={bottleRef}
-            initial={{ scale: .9, opacity: 0 }}
-            animate={isBottleInView ? { scale: 1, opacity: 1 } : {}}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="relative w-[250px] md:w-[380px] h-auto"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={
+              isBottleInView
+                ? { scale: 1, opacity: 1, y: [0, -10, 0] }
+                : {}
+            }
+            transition={{
+              duration: 1.8,
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatType: "loop",
+            }}
+            className="relative w-[180px] sm:w-[250px] md:w-[320px] h-auto drop-shadow-[0_0_40px_#00FFF7]"
           >
             <img
               src={campacricket}
               alt="Campa Cricket Bottle"
-              className="w-full h-[800px] rounded-2xl"
+              className="w-full h-[400px] sm:h-[600px] md:h-[800px] object-contain"
             />
           </motion.div>
 
-          {/* Right Text */}
+          {/* 💬 Right Info */}
           <motion.div
             initial={{ x: 100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: .9, ease: "easeOut" }}
+            transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="text-center md:text-left md:w-1/3 space-y-4"
+            className="text-center md:text-left w-full md:w-1/3 space-y-4 px-2"
           >
-            <h1 className="text-3xl md:text-5xl font-logik text-cyan-300 drop-shadow-lg">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-logik text-cyan-300 drop-shadow-lg">
               POWERED WITH <br /> ELECTROLYTES ⚡
             </h1>
-            <p className="text-lg md:text-2xl text-gray-300 font-jio">
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 font-jio">
               Replenish. Refresh. Rejoice.
             </p>
           </motion.div>
-
         </div>
       </div>
     </div>

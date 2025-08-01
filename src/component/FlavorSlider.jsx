@@ -1,20 +1,21 @@
 import { useGSAP } from "@gsap/react";
 import { flavorlists } from "../constants";
 import gsap from "gsap";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 
 const FlavorSlider = () => {
   const sliderRef = useRef();
 
-  const isTablet = useMediaQuery({
+  const isTabletOrMobile = useMediaQuery({
     query: "(max-width: 1024px)",
   });
 
   useGSAP(() => {
-    const scrollAmount = sliderRef.current.scrollWidth - window.innerWidth;
+    const scrollAmount =
+      sliderRef.current.scrollWidth - window.innerWidth;
 
-    if (!isTablet) {
+    if (!isTabletOrMobile) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".flavor-section",
@@ -61,20 +62,31 @@ const FlavorSlider = () => {
         },
         "<"
       );
-  });
+  }, [isTabletOrMobile]);
 
   return (
-    <div ref={sliderRef} className="slider-wrapper">
-      <div className="flavors">
+    <div
+      ref={sliderRef}
+      className={`slider-wrapper py-16 ${
+        isTabletOrMobile ? "overflow-x-auto" : ""
+      }`}
+    >
+      <div
+        className={`flavors flex gap-4 sm:gap-6 md:gap-8 lg:gap-10 w-max px-6 sm:px-8 md:px-10`}
+      >
         {flavorlists.map((flavor) => (
           <div
             key={flavor.name}
-            className={`relative z-30 lg:w-[50vw] w-96 lg:h-[70vh] md:w-[90vw] md:h-[50vh]  flex-none ${flavor.rotation}`}
+            className={`relative z-30 flex-none transition-transform duration-300 hover:scale-105 cursor-pointer 
+              rounded-2xl overflow-hidden shadow-xl border border-[#ffffff11] backdrop-blur-sm 
+              w-[80vw] sm:w-[70vw] md:w-[55vw] lg:w-[42vw]
+              h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-[70vh]
+              ${flavor.rotation}`}
           >
             <img
               src={`/images/${flavor.color}-bg.webp`}
-              alt=""
-              className="absolute bottom-0 h-[75vh]"
+              alt={`${flavor.name}-bg`}
+              className="absolute bottom-0 h-full w-full object-cover opacity-90"
             />
 
             <img
@@ -82,14 +94,6 @@ const FlavorSlider = () => {
               alt=""
               className="drinks"
             />
-
-            {/* <img
-              src={`/images/${flavor.color}-elements.png`}
-              alt=""
-              className="elements "
-            /> */}
-
-            {/* <h1>{flavor.name}</h1> */}
           </div>
         ))}
       </div>

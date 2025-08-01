@@ -1,55 +1,48 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import poster1 from "../assets/campaold.webp";
+import CampaOld from "../../public/images/campagoogle.webp";
+import CampaOld2 from "../../public/images/campagoogle1.jpeg";
 import poster2 from "../assets/vintage2.webp";
 import poster3 from "../assets/vintage3.webp";
 import modern from "../assets/campamodern.jpeg";
+import Image1977 from "../../public/images/Campa1977.webp";
+import Image1980 from "../../public/images/Campa1980.webp";
+import Image1995 from "../../public/images/Campa1995.webp";
+import Image2000 from "../../public/images/Campa2000.webp";
+import lastcampa from "../../public/images/lastcampa.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Legacy = () => {
   const sectionRef = useRef(null);
-  const scrollRef = useRef(null);
+  const carouselRef = useRef(null);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      const pinWrapWidth = scrollRef.current.scrollWidth;
-
-      const horizontalScroll = gsap.to(scrollRef.current, {
-        x: () => `-${pinWrapWidth - window.innerWidth}`,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          pin: true,
-          scrub: 1,
-          end: () => "+=" + pinWrapWidth,
-        },
+      gsap.to(carouselRef.current, {
+        xPercent: -100,
+        repeat: -1,
+        duration: 40,
+        ease: "linear",
       });
 
-      gsap.utils.toArray(".poster").forEach((el) => {
-        gsap.fromTo(
-          el,
-          {
-            filter: "grayscale(100%) sepia(80%)",
-            opacity: 0.5,
-            scale: 0.95,
+      gsap.fromTo(
+        sectionRef.current,
+        { opacity: 0, y: 60 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
           },
-          {
-            opacity: 1,
-            filter: "grayscale(10%) sepia(0%)",
-            scale: 1,
-            duration: 1,
-            scrollTrigger: {
-              trigger: el,
-              containerAnimation: horizontalScroll,
-              start: "left center",
-              end: "right center",
-              scrub: true,
-            },
-          }
-        );
-      });
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -58,35 +51,62 @@ const Legacy = () => {
   return (
     <section
       ref={sectionRef}
-      className="overflow-hidden  bg-[#260046] text-white relative"
+      className="relative min-h-screen bg-[#1a0033] text-white overflow-hidden flex items-center justify-center px-4 md:px-12"
     >
-      {/* 🟡 Title and Description */}
-      <div className="absolute w-full   justify-center items-center top-10 text-center  z-10 max-w-screen  ">
-        <h1 className="text-5xl h-50 md:text-6xl font-bold font-logik bg-gradient-to-t from-gray-700 via-gray-200 to-gray-700 bg-clip-text text-transparent drop-shadow-lg">
+      {/* 💡 Neon Glow Background */}
+      <div className="absolute z-0 w-[700px] h-[700px] bg-gradient-to-br from-[#ff00ff44] via-[#ffffff10] to-[#00ffff44] blur-[140px] rounded-full top-0 left-1/2 -translate-x-1/2 pointer-events-none" />
+
+      {/* 🌟 Title & Subtitle */}
+      <div className="absolute top-16 z-30 text-center">
+        <h1 className="text-4xl md:text-6xl font-bold font-logik text-transparent bg-gradient-to-tr from-cyan-300 via-white to-cyan-300 bg-clip-text drop-shadow-2xl animate-pulse">
           A 50+ Years of Legacy
         </h1>
-
-        <p className="mt-4 text-4xl md:text-2xl  font-inter  bg-gradient-to-t from-gray-700 via-gray-200 to-gray-700 bg-clip-text text-transparent drop-shadow-lg">
-          One of the most iconic Indian brands, <br />
-          now reborn for modern India in a new avatar.
+        <p className="mt-4 text-lg md:text-2xl font-inter text-gray-300 max-w-2xl mx-auto">
+          One of the most iconic Indian brands, <br /> reborn for modern India in a bold, nostalgic avatar.
         </p>
       </div>
 
-      {/* 🟣 Horizontal Poster Scroll */}
-      <div
-        ref={scrollRef}
-        className="flex w-max gap-20 mt-48  px-[calc(50vw-200px)] h-screen  items-center justify-start"
-      >
-        {[poster1, poster2, poster3, modern].map((src, i) => (
-          <img
-            key={i}
-            src={src}
-            alt={`poster-${i}`}
-            className="poster w-[500px] h-[500px]  mb-40 rounded-2xl shadow-7xl object-fill  transition-transform duration-900 hover:scale-105"
-          />
-        ))}
+      {/* 🖼️ Scrolling Carousel */}
+      <div className="absolute z-10 bottom-10 left-1/2 -translate-x-1/2 w-full overflow-hidden">
+        <div
+          ref={carouselRef}
+          className="flex gap-12 w-max opacity-100 scale-100"
+        >
+          {[
+            poster1,
+            CampaOld,
+            Image1977,
+            poster2,
+            Image1980,
+            poster3,
+            Image1995,
+            Image2000,
+            modern,
+            lastcampa,
+            CampaOld2,
+            poster1,
+            Image1977,
+            poster2,
+            Image1980,
+            poster3,
+            Image1995,
+            Image2000,
+          ].map((src, index) => (
+            <div
+              key={index}
+              className="relative group transition-transform duration-300 hover:scale-105"
+            >
+              <img
+                src={src}
+                alt={`carousel-${index}`}
+                className="w-[260px] md:w-[330px] h-[400px] md:h-[480px] rounded-3xl object-cover shadow-[0_10px_50px_rgba(255,255,255,0.2)]"
+              />
+              {/* ✨ Glass Reflection */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-white/10 via-transparent to-black/40 opacity-30 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none" />
+            </div>
+          ))}
+        </div>
       </div>
-
     </section>
   );
 };
