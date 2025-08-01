@@ -14,8 +14,8 @@ const Nav = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50">
-      <nav className="bg-gradient-to-b from-[#08142B] via-[#0D1D3B] to-[#08142B] text-[#D6B96A] px-6 sm:px-12 lg:px-20 py-4 border-y-2 border-[#D6B96A]/10 shadow-xl backdrop-blur-sm flex justify-between items-center w-full max-w-[1440px] mx-auto">
+    <header className="fixed top-0  w-screen z-50">
+      <nav className="bg-gradient-to-b w-full from-[#08142B] via-[#0D1D3B] to-[#08142B] text-[#D6B96A] px-6 sm:px-12 lg:px-20 py-4 border-y-2 border-[#D6B96A]/10 shadow-xl backdrop-blur-sm flex justify-between items-center  max-w-[1600px] mx-auto">
         {/* 🧃 Brand / Logo */}
         <div className="font-bold text-sm sm:text-base tracking-widest">CAMPA</div>
 

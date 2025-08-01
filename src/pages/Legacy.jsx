@@ -20,10 +20,24 @@ const Legacy = () => {
   const sectionRef = useRef(null);
   const carouselRef = useRef(null);
 
+  const images = [
+    poster1,
+    CampaOld,
+    Image1977,
+    poster2,
+    Image1980,
+    poster3,
+    Image1995,
+    Image2000,
+    modern,
+    lastcampa,
+    CampaOld2,
+  ];
+
   useEffect(() => {
     let ctx = gsap.context(() => {
       gsap.to(carouselRef.current, {
-        xPercent: -100,
+        xPercent: -50, // Only half since it's duplicated
         repeat: -1,
         duration: 40,
         ease: "linear",
@@ -66,32 +80,10 @@ const Legacy = () => {
         </p>
       </div>
 
-      {/* 🖼️ Scrolling Carousel */}
+      {/* 🖼️ Seamless Scrolling Carousel */}
       <div className="absolute z-10 bottom-10 left-1/2 -translate-x-1/2 w-full overflow-hidden">
-        <div
-          ref={carouselRef}
-          className="flex gap-12 w-max opacity-100 scale-100"
-        >
-          {[
-            poster1,
-            CampaOld,
-            Image1977,
-            poster2,
-            Image1980,
-            poster3,
-            Image1995,
-            Image2000,
-            modern,
-            lastcampa,
-            CampaOld2,
-            poster1,
-            Image1977,
-            poster2,
-            Image1980,
-            poster3,
-            Image1995,
-            Image2000,
-          ].map((src, index) => (
+        <div ref={carouselRef} className="flex gap-12 w-max opacity-100 scale-100">
+          {[...images, ...images].map((src, index) => (
             <div
               key={index}
               className="relative group transition-transform duration-300 hover:scale-105"
