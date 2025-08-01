@@ -25,7 +25,7 @@ const App = () => {
       {/* ✅ Fixed Nav placed outside smooth-content */}
       <Nav />
       
-      <div id="smooth-content" className="pt-20"> {/* Add padding to avoid content hiding under navbar */}
+      <div id="smooth-content" className=""> {/* Add padding to avoid content hiding under navbar */}
         <div className='min-h-screen text-white'>
           <CampaCola />
           <Legacy />

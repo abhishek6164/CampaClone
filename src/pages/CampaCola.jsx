@@ -4,7 +4,7 @@ import campaBottle from "../assets/campa1.png";
 
 const CampaCola = () => {
   return (
-    <section className="relative w-full -top-20 min-h-screen bg-[#0A0A0A] text-white overflow-hidden flex items-center justify-center px-4 sm:px-6 lg:px-20 py-16">
+    <section className="relative w-full  min-h-screen bg-[#0A0A0A] text-white overflow-hidden flex items-center justify-center px-4 sm:px-6 lg:px-20 py-16">
       {/* 💭 Animated Blurry Bubbles */}
       {[...Array(30)].map((_, i) => {
         const size = Math.random() * 15 + 4;
